@@ -45,7 +45,7 @@ class WSUWP_Maps {
 		} elseif ( 'large' === $att['size'] ) {
 			$x = 495;
 			$y = 372;
-		} elseif ( 'xlarge' === $att['size'] ) {
+		} elseif ( 'largest' === $att['size'] ) {
 			$x = 731;
 			$y = 549;
 		} else {
