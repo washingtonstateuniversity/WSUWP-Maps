@@ -5,7 +5,9 @@ This plugin provides a shortcode to embed maps from http://maps.wsu.edu in your 
 The only required attribute is the map's ID. When you click "Link/Embed" while on maps.wsu.edu, you will receive HTML that looks like this:
 
 ```
-<iframe width="214" height="161" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://map.wsu.edu/t/68DE9EF" ></iframe>
+<iframe width="214" height="161" frameborder="0"
+        scrolling="no" marginheight="0" marginwidth="0"
+        src="http://map.wsu.edu/t/68DE9EF" ></iframe>
 ```
 
 The piece to copy as the map ID in the above HTML is `68DE9EF`.
