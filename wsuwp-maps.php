@@ -27,7 +27,7 @@ class WSUWP_Maps {
 	 * Enqueue the mapping scripts and styles when a page with the proper shortcode tag is being displayed.
 	 */
 	public function enqueue_map_script() {
-		if ( is_singular() ) {
+		if ( ! is_singular() ) {
 			return;
 		}
 
