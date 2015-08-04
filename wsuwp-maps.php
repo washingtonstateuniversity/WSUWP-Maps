@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WSUWP Maps
-Version: 0.2.0
+Version: 0.3.0
 Plugin URI: http://web.wsu.edu
 Description: A shortcode to display an embedded map from maps.wsu.edu.
 Author: washingtonstateuniversity, jeremyfelt
@@ -13,7 +13,7 @@ class WSUWP_Maps {
 	/**
 	 * @var string Current version of this plugin.
 	 */
-	var $plugin_version = '0.2.0';
+	var $plugin_version = '0.3.0';
 
 	/**
 	 * Setup hooks.
