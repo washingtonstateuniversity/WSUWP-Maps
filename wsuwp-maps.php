@@ -40,15 +40,22 @@ class WSUWP_Maps {
 	 * Handle the supplied shortcode to display a WSU map.
 	 */
 	public function display_map( $attributes ) {
-		if( isset($attributes['version']) && $attributes['version'] == "beta" ){
+		
+		$defaults = array(
+			'size' => 'medium',
+			'id' => '',
+			'alias' => '',
+			'width' => '',
+			'height' => '',
+			'version' => '',
+			'scheme' => 'https',
+			'map' => '',
+		);
+		$att = shortcode_atts( $defaults, $attributes );
+		
+		if ( 'beta' === $att['version'] ){
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_map_script' ) );
-			$default_atts = array(
-				'version' => '',
-				'scheme' => 'https',
-				'map' => '',
-			);
-			$attributes = shortcode_atts( $default_atts, $attributes );
-	
+
 			$map_path = sanitize_title_with_dashes( $attributes['map'] );
 	
 			if ( empty( $map_path ) ) {
@@ -63,15 +70,7 @@ class WSUWP_Maps {
 			return $content;
 
 		}else{
-			$defaults = array(
-				'size' => 'medium',
-				'id' => '',
-				'alias' => '',
-				'width' => '',
-				'height' => '',
-			);
-			$att = shortcode_atts( $defaults, $attributes );
-	
+
 			if ( '' !== $att['id'] ) {
 				$map_url = 'http://map.wsu.edu/t/' . sanitize_key( $att['id'] );
 			} elseif ( '' !== $att['alias'] ) {
