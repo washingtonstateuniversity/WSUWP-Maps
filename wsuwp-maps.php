@@ -70,11 +70,11 @@ class WSUWP_Maps {
 
 		} else {
 			if ( '' !== $att['id'] ) {
-				$map_url = 'http://map.wsu.edu/t/' . sanitize_key( $att['id'] );
+				$map_url = 'https://map.wsu.edu/t/' . sanitize_key( $att['id'] );
 			} elseif ( '' !== $att['alias'] ) {
-				$map_url = 'http://map.wsu.edu/rt/' . sanitize_key( $att['alias'] ) . '?mode=standalone';
+				$map_url = 'https://map.wsu.edu/rt/' . sanitize_key( $att['alias'] ) . '?mode=standalone';
 			} else {
-				$map_url = 'http://map.wsu.edu/t/942CFE9C'; // Default to the WSU label.
+				$map_url = 'https://map.wsu.edu/t/942CFE9C'; // Default to the WSU label.
 			}
 
 			if ( 'small' === $att['size'] ) {
