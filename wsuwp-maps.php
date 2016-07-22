@@ -59,7 +59,7 @@ class WSUWP_Maps {
 				return '';
 			}
 
-			$content = '<div id="map-embed-' . $map_path . '"></div>';
+			$content = '<div id="map-embed-' . $map_path . '" class="wsuwp-map-container"></div>';
 			$content .= '<script>var map_view_scripts_block = true; var map_view_id = "map-embed-' . esc_js( $map_path ) .'";</script>';
 
 			wp_enqueue_script( 'wsu-map-embed', esc_url( 'https://map.wsu.edu/embed/' . $map_path ), array( 'jquery' ), false, true );
