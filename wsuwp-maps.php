@@ -54,7 +54,8 @@ class WSUWP_Maps {
 		);
 		$att = shortcode_atts( $defaults, $attributes );
 
-		if ( 'beta' === $att['version'] ) {
+		// The map attribute is used for newer style maps. ID is used for older style maps.
+		if ( ! empty( $att['map'] ) ) {
 			$map_path = sanitize_title_with_dashes( $attributes['map'] );
 
 			if ( empty( $map_path ) ) {
@@ -68,14 +69,8 @@ class WSUWP_Maps {
 
 			return $content;
 
-		} else {
-			if ( '' !== $att['id'] ) {
-				$map_url = 'https://map.wsu.edu/t/' . sanitize_key( $att['id'] );
-			} elseif ( '' !== $att['alias'] ) {
-				$map_url = 'https://map.wsu.edu/rt/' . sanitize_key( $att['alias'] ) . '?mode=standalone';
-			} else {
-				$map_url = 'https://map.wsu.edu/t/942CFE9C'; // Default to the WSU label.
-			}
+		} elseif ( ! empty( $att['id'] ) ) {
+			$map_url = 'https://map.wsu.edu/t/' . sanitize_key( $att['id'] );
 
 			if ( 'small' === $att['size'] ) {
 				$x = 214;
@@ -106,6 +101,8 @@ class WSUWP_Maps {
 
 			return $html;
 		}
+
+		return '<!-- no valid map parameters -->';
 	}
 }
 new WSUWP_Maps();
