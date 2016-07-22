@@ -45,11 +45,8 @@ class WSUWP_Maps {
 		$defaults = array(
 			'size' => 'medium',
 			'id' => '',
-			'alias' => '',
 			'width' => '',
 			'height' => '',
-			'version' => '',
-			'scheme' => 'https',
 			'map' => '',
 		);
 		$att = shortcode_atts( $defaults, $attributes );
