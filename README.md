@@ -1,13 +1,17 @@
 # WSU Maps Shortcode
 
-This plugin provides a shortcode to embed maps from http://maps.wsu.edu in your content.
+This plugin provides a `[wsuwp_map]` shortcode to embed maps from https://map.wsu.edu in your content.
 
-The only required attribute is the map's ID. When you click "Link/Embed" while on maps.wsu.edu, you will receive HTML that looks like this:
+The only required attribute is the map's ID or map name.
+
+## Embed maps by ID
+
+When you click "Link/Embed" while on https://map.wsu.edu, you will receive HTML that looks like this:
 
 ```
 <iframe width="214" height="161" frameborder="0"
         scrolling="no" marginheight="0" marginwidth="0"
-        src="http://map.wsu.edu/t/68DE9EF" ></iframe>
+        src="https://map.wsu.edu/t/68DE9EF" ></iframe>
 ```
 
 The piece to copy as the map ID in the above HTML is `68DE9EF`.
@@ -29,6 +33,10 @@ The available sizes are as follows:
 
 A custom size can be used by defining the width and height manually: `[wsuwp_map id="68DE9EF" width=400 height=200]`
 
+## Embed custom maps by name
+
 In some cases, you may have a custom map created by University Communications. Use your alias as part of the shortcode rather than the ID:
 
-`[wsuwp_map alias="my-custom-code" size="largest"]`
+`[wsuwp_map map="my-custom-code"]`
+
+This will embed the map in a container `DIV` with the class of `wsuwp-map-container` that can be targetted with CSS for sizing.

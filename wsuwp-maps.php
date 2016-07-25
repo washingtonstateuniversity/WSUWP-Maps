@@ -3,7 +3,7 @@
 Plugin Name: WSUWP Maps
 Version: 0.3.2
 Plugin URI: https://web.wsu.edu/
-Description: A shortcode to display an embedded map from maps.wsu.edu.
+Description: A shortcode to display an embedded map from map.wsu.edu.
 Author: washingtonstateuniversity, jeremyfelt, jeremybass
 Author URI: https://web.wsu.edu/
 */
@@ -34,7 +34,7 @@ class WSUWP_Maps {
 		$post = get_post();
 		if ( isset( $post->post_content ) && has_shortcode( $post->post_content, 'wsuwp_map' ) ) {
 			wp_enqueue_style( 'jquery-ui-smoothness', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.min.css', array(), false );
-			wp_enqueue_style( 'wsu-map-style', 'https://beta.maps.wsu.edu/content/dis/css/map.view.styles.css', array(), false );
+			wp_enqueue_style( 'wsu-map-style', 'https://map.wsu.edu/content/dis/css/map.view.styles.css', array(), false );
 		}
 	}
 
@@ -45,37 +45,29 @@ class WSUWP_Maps {
 		$defaults = array(
 			'size' => 'medium',
 			'id' => '',
-			'alias' => '',
 			'width' => '',
 			'height' => '',
-			'version' => '',
-			'scheme' => 'https',
 			'map' => '',
 		);
 		$att = shortcode_atts( $defaults, $attributes );
 
-		if ( 'beta' === $att['version'] ) {
+		// The map attribute is used for newer style maps. ID is used for older style maps.
+		if ( ! empty( $att['map'] ) ) {
 			$map_path = sanitize_title_with_dashes( $attributes['map'] );
 
 			if ( empty( $map_path ) ) {
 				return '';
 			}
 
-			$content = '<div id="map-embed-' . $map_path . '"></div>';
+			$content = '<div id="map-embed-' . $map_path . '" class="wsuwp-map-container"></div>';
 			$content .= '<script>var map_view_scripts_block = true; var map_view_id = "map-embed-' . esc_js( $map_path ) .'";</script>';
 
-			wp_enqueue_script( 'wsu-map-embed', esc_url( 'https://beta.maps.wsu.edu/embed/ ' . $map_path ), array( 'jquery' ), false, true );
+			wp_enqueue_script( 'wsu-map-embed', esc_url( 'https://map.wsu.edu/embed/' . $map_path ), array( 'jquery' ), false, true );
 
 			return $content;
 
-		} else {
-			if ( '' !== $att['id'] ) {
-				$map_url = 'https://map.wsu.edu/t/' . sanitize_key( $att['id'] );
-			} elseif ( '' !== $att['alias'] ) {
-				$map_url = 'https://map.wsu.edu/rt/' . sanitize_key( $att['alias'] ) . '?mode=standalone';
-			} else {
-				$map_url = 'https://map.wsu.edu/t/942CFE9C'; // Default to the WSU label.
-			}
+		} elseif ( ! empty( $att['id'] ) ) {
+			$map_url = 'https://map.wsu.edu/t/' . sanitize_key( $att['id'] );
 
 			if ( 'small' === $att['size'] ) {
 				$x = 214;
@@ -106,6 +98,8 @@ class WSUWP_Maps {
 
 			return $html;
 		}
+
+		return '<!-- no valid map parameters -->';
 	}
 }
 new WSUWP_Maps();
